@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Reviews from '../components/reviews/Reviews';
 
 const Dashboard = () => {
     const [activeTab, setActiveTab] = useState('overview');
@@ -132,16 +133,85 @@ const Dashboard = () => {
 
     const reviews = [
         {
-            rating: 5.0,
-            text: 'Exceptional service! The team arrived on time, handled all our belongings with care...',
+            id: '#LEAD-4511',
+            rating: 5,
             author: 'Sarah Johnson',
-            date: '2 days ago'
+            initials: 'SJ',
+            bgColor: 'bg-purple-500',
+            date: '2025-10-15',
+            dateText: '📅 2025-10-15',
+            fromLocation: 'San Francisco, CA',
+            toLocation: 'Los Angeles, CA',
+            bedrooms: '4+ Bedrooms',
+            text: 'Exceptional service! The team arrived on time, handled all our belongings with care, and completed the move faster than expected. Highly professional and courteous throughout. Would definitely recommend to anyone looking for reliable movers.',
+            helpful: 12,
+            hasResponse: true,
+            response: 'Thank you so much for the wonderful review, Sarah! It was our pleasure to help with your move.',
+            responseDate: '2025-10-16'
         },
         {
-            rating: 5.0,
-            text: 'Great experience moving our 2-bedroom apartment. They were very organized...',
+            id: '#LEAD-4552',
+            rating: 5,
             author: 'Mike Chen',
-            date: '5 days ago'
+            initials: 'MC',
+            bgColor: 'bg-blue-500',
+            date: '2025-10-10',
+            dateText: '📅 2025-10-10',
+            fromLocation: 'Oakland, CA',
+            toLocation: 'Berkeley, CA',
+            bedrooms: '2-3 Bedrooms',
+            text: 'Great experience moving our 2-bedroom apartment. They were very organized, wrapped everything properly, and nothing was damaged. The quote was accurate and no hidden fees. Thank you!',
+            helpful: 8,
+            hasResponse: true,
+            response: 'We appreciate your business, Mike! Glad everything went smoothly.',
+            responseDate: '2025-10-11'
+        },
+        {
+            id: '#LEAD-4485',
+            rating: 5,
+            author: 'David Thompson',
+            initials: 'DT',
+            bgColor: 'bg-indigo-500',
+            date: '2025-09-28',
+            dateText: '📅 2025-09-28',
+            fromLocation: 'San Francisco, CA',
+            toLocation: 'Los Angeles, CA',
+            bedrooms: 'Out of State Move',
+            text: 'Moved from SF to LA and everything went smoothly. Communication was excellent throughout the process. Items arrived on time and in perfect condition. Worth every penny!',
+            helpful: 15,
+            hasResponse: true,
+            response: 'Thank you, David! Long distance moves are our specialty. Best wishes in your new location!',
+            responseDate: '2025-09-29'
+        },
+        {
+            id: '#LEAD-4472',
+            rating: 4,
+            author: 'Lisa Anderson',
+            initials: 'LA',
+            bgColor: 'bg-yellow-500',
+            date: '2025-09-20',
+            dateText: '📅 2025-09-20',
+            fromLocation: 'San Francisco, CA',
+            toLocation: 'San Francisco, CA',
+            bedrooms: 'Studio',
+            text: 'Good service, efficient movers. They were a bit delayed due to traffic but kept me informed. Fair pricing and careful with my furniture.',
+            helpful: 3,
+            hasResponse: false
+        },
+        {
+            id: '#LEAD-4498',
+            rating: 4,
+            author: 'Emily Rodriguez',
+            initials: 'ER',
+            bgColor: 'bg-pink-500',
+            date: '2025-10-05',
+            dateText: '📅 2025-10-05',
+            fromLocation: 'San Jose, CA',
+            toLocation: 'Sunnyvale, CA',
+            bedrooms: '2-3 Bedrooms',
+            text: 'Overall good service. The crew was friendly and worked hard. One item had a minor scratch, but they handled the situation professionally and made it right. Would use again.',
+            helpful: 5,
+            hasResponse: false
         }
     ];
 
@@ -352,7 +422,9 @@ const Dashboard = () => {
                                             Recent Reviews
                                         </h2>
                                     </div>
-                                    <button className="px-3 py-2 text-orange-600 hover:text-orange-700 font-medium text-xs md:text-sm flex items-center gap-1 self-start sm:self-auto">
+                                    <button
+                                        onClick={() => setActiveTab('reviews')}
+                                        className="px-3 py-2 text-orange-600 hover:text-orange-700 font-medium text-xs md:text-sm flex items-center gap-1 self-start sm:self-auto">
                                         View All Reviews
                                         <svg className="w-3 h-3 md:w-4 md:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -576,54 +648,7 @@ const Dashboard = () => {
                 )}
 
                 {/* Reviews Tab */}
-                {activeTab === 'reviews' && (
-                    <div className="bg-white rounded-xl md:rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.08)] border border-gray-200 overflow-hidden">
-                        <div className="p-4 md:p-6 border-b border-gray-200">
-                            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-                                <div>
-                                    <h2 className="text-lg md:text-xl font-bold text-gray-800 flex items-center gap-2">
-                                        <svg className="w-5 h-5 md:w-6 md:h-6 text-orange-500" fill="currentColor" viewBox="0 0 20 20">
-                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                        </svg>
-                                        Recent Reviews
-                                    </h2>
-                                </div>
-                                <button className="px-3 py-2 text-orange-600 hover:text-orange-700 font-medium text-xs md:text-sm flex items-center gap-1 self-start sm:self-auto">
-                                    View All Reviews
-                                    <svg className="w-3 h-3 md:w-4 md:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                                    </svg>
-                                </button>
-                            </div>
-                        </div>
-
-                        <div className="p-4 md:p-6 space-y-4">
-                            {reviews.map((review, index) => (
-                                <div key={index} className="bg-gradient-to-br from-orange-50 to-yellow-50 rounded-lg md:rounded-xl p-4 md:p-5 border border-orange-100 shadow-sm hover:shadow-md transition-all duration-300">
-                                    <div className="flex items-start gap-3 md:gap-4">
-                                        <div className="flex-shrink-0">
-                                            <div className="flex items-center gap-1">
-                                                {[...Array(5)].map((_, i) => (
-                                                    <svg key={i} className="w-4 h-4 md:w-5 md:h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                                    </svg>
-                                                ))}
-                                                <span className="ml-1 md:ml-2 text-xs md:text-sm font-bold text-gray-800">{review.rating}</span>
-                                            </div>
-                                        </div>
-                                        <div className="flex-1 min-w-0">
-                                            <p className="text-gray-700 text-sm md:text-base mb-2 md:mb-3">{review.text}</p>
-                                            <div className="flex items-center justify-between gap-2">
-                                                <p className="text-xs md:text-sm font-medium text-gray-800 truncate">{review.author}</p>
-                                                <p className="text-xs text-gray-500 whitespace-nowrap">{review.date}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                )}
+                {activeTab === 'reviews' && <Reviews reviews={reviews} />}
             </div>
 
             {/* Modal for Lead Details */}
