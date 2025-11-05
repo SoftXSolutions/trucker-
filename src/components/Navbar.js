@@ -24,6 +24,7 @@ const Navbar = () => {
                         <Link to="/" className="text-gray-700 hover:text-primary">Get a Quote</Link>
                         <Link to="/pricing" className="text-gray-700 hover:text-primary">Pricing</Link>
                         <Link to="/dashboard" className="text-gray-700 hover:text-primary">Dashboard</Link>
+                        <Link to="/user" className="text-gray-700 hover:text-primary">User</Link>
                         <Link to="/admin" className="text-gray-700 hover:text-primary">Admin</Link>
                        
                         <Link to="/signin" className="text-gray-700 hover:text-primary">Sign In</Link>
@@ -44,6 +45,7 @@ const Navbar = () => {
                         <Link to="/" className="block py-2 text-gray-700">Get a Quote</Link>
                         <Link to="/pricing" className="block py-2 text-gray-700">Pricing</Link>
                         <Link to="/dashboard" className="block py-2 text-gray-700">Dashboard</Link>
+                        <Link to="/user" className="block py-2 text-gray-700">User</Link>
                         <Link to="/signin" className="block py-2 text-gray-700">Sign In</Link>
                     </div>
                 )}

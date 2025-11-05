@@ -1,7 +1,10 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import Button from './Button';
 
 const TopMovers = () => {
+  const navigate = useNavigate();
+  
   const movers = [
     {
       name: 'Karim Movers',
@@ -124,7 +127,10 @@ const TopMovers = () => {
                   </div>
                 </div>
 
-                <Button className="w-full mt-auto">
+                <Button 
+                  className="w-full mt-auto"
+                  onClick={() => navigate('/quote')}
+                >
                   Get Quote
                   <svg className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
@@ -136,12 +142,16 @@ const TopMovers = () => {
         </div>
 
         <div className="text-center">
-          <Button variant="outline" className="text-lg">
+        
+          <Button variant="outline" className="text-lg"
+          onClick={()=>navigate('/quote')}
+          >
             View All Movers
             <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
             </svg>
           </Button>
+        
         </div>
       </div>
     </section>

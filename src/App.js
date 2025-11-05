@@ -1,4 +1,3 @@
-import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -6,6 +5,14 @@ import Home from './pages/Home';
 import Pricing from './pages/Pricing';
 import Dashboard from './pages/Dashboard';
 import Admin from './pages/Admin';
+import GetQuote from './pages/GetQuote';
+import ChooseMovers from './pages/ChooseMovers';
+import QuoteSuccess from './pages/QuoteSuccess';
+import QuotesDashboard from './pages/QuotesDashboard';
+import RegisterMover from './pages/RegisterMover';
+import RegistrationSuccess from './pages/RegistrationSuccess';
+import UserDashboard from './pages/UserDashboard';
+import TruckerProfile from './pages/TruckerProfile';
 
 function App() {
   return (
@@ -15,9 +22,17 @@ function App() {
         <main className="flex-grow">
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/quote" element={<GetQuote />} />
+            <Route path="/choose-movers" element={<ChooseMovers />} />
+            <Route path="/quote-success" element={<QuoteSuccess />} />
+            <Route path="/quotes" element={<QuotesDashboard />} />
             <Route path="/pricing" element={<Pricing />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/admin" element={<Admin />} />
+            <Route path="/register" element={<RegisterMover />} />
+            <Route path="/registration-success" element={<RegistrationSuccess />} />
+            <Route path="/user" element={<UserDashboard />} />
+            <Route path="/truckers/:id" element={<TruckerProfile />} />
           </Routes>
         </main>
         <Footer />

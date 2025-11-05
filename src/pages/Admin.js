@@ -2,6 +2,11 @@ import { useState, useEffect } from 'react';
 import StatCard from '../components/admin/StatCard';
 import AlertCard from '../components/admin/AlertCard';
 import ApplicationCard from '../components/admin/ApplicationCard';
+import TruckerApplicationCard from '../components/admin/TruckerApplicationCard';
+import UserManagement from '../components/admin/UserManagement';
+import { MoverManagement } from '../components/admin/movers';
+import { LeadsManagement } from '../components/admin/leads';
+import TruckerRegistrationApplications from '../components/admin/TruckerRegistrationApplications';
 import adminApi from '../services/adminApi';
 import RevenueLeadsChart from '../components/admin/charts/RevenueLeadsChart';
 import LeadStatusPie from '../components/admin/charts/LeadStatusPie';
@@ -11,6 +16,7 @@ const Admin = () => {
     const [stats, setStats] = useState(null);
     const [alerts, setAlerts] = useState([]);
     const [applications, setApplications] = useState([]);
+    const [truckerApplications, setTruckerApplications] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -25,10 +31,33 @@ const Admin = () => {
                 adminApi.getCriticalAlerts(),
                 adminApi.getMoverApplications()
             ]);
-            
+
+            // Mock trucker applications data - replace with API call later
+            const mockTruckerApps = [
+                {
+                    id: 1,
+                    companyName: 'Elite Moving Services',
+                    type: 'Professional',
+                    documents: 3,
+                    submittedAt: '2 hours ago',
+                    status: 'pending',
+                    verified: true
+                },
+                {
+                    id: 2,
+                    companyName: 'Metro Movers Inc',
+                    type: 'Starter',
+                    documents: 5,
+                    submittedAt: '5 hours ago',
+                    status: 'pending',
+                    verified: false
+                }
+            ];
+
             setStats(statsData);
             setAlerts(alertsData);
             setApplications(appsData);
+            setTruckerApplications(mockTruckerApps);
         } catch (error) {
             console.error('Error loading dashboard data:', error);
         } finally {
@@ -69,6 +98,42 @@ const Admin = () => {
         }
     };
 
+    const handleTruckerApprove = async (application) => {
+        try {
+            // Frontend handling - update status locally
+            setTruckerApplications(prev =>
+                prev.map(app =>
+                    app.id === application.id
+                        ? { ...app, status: 'approved' }
+                        : app
+                )
+            );
+
+            // TODO: Add backend API call when ready
+            console.log(`Approved trucker application ${application.id}`);
+        } catch (error) {
+            console.error('Error approving trucker application:', error);
+        }
+    };
+
+    const handleTruckerReject = async (application) => {
+        try {
+            // Frontend handling - update status locally
+            setTruckerApplications(prev =>
+                prev.map(app =>
+                    app.id === application.id
+                        ? { ...app, status: 'rejected' }
+                        : app
+                )
+            );
+
+            // TODO: Add backend API call when ready
+            console.log(`Rejected trucker application ${application.id}`);
+        } catch (error) {
+            console.error('Error rejecting trucker application:', error);
+        }
+    };
+
     const labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
     const leadsSeries = [240, 280, 260, 310, 295, 330];
     const revenueSeries = [48000, 52000, 50000, 62000, 60000, 70000];
@@ -77,9 +142,9 @@ const Admin = () => {
 
     if (loading) {
         return (
-            <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center">
+            <div className="min-h-screen bg-yellow-50/40 flex items-center justify-center">
                 <div className="text-center">
-                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-600 mx-auto"></div>
                     <p className="mt-4 text-gray-600">Loading dashboard...</p>
                 </div>
             </div>
@@ -87,7 +152,7 @@ const Admin = () => {
     }
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+        <div className="min-h-screen bg-yellow-50/40">
             {/* Header */}
             <div className="bg-white shadow-sm border-b border-gray-200">
                 <div className="container mx-auto px-4 py-6">
@@ -106,17 +171,17 @@ const Admin = () => {
                             { id: 'dashboard', label: 'Dashboard', icon: '📊' },
                             { id: 'users', label: 'Users', icon: '👥' },
                             { id: 'movers', label: 'Movers', icon: '🚚' },
+                            { id: 'trucker-applications', label: 'Trucker Applications', icon: '🚛' },
                             { id: 'leads', label: 'Leads', icon: '📋' },
                             { id: 'billing', label: 'Billing', icon: '💳' }
                         ].map((tab) => (
                             <button
                                 key={tab.id}
                                 onClick={() => setActiveTab(tab.id)}
-                                className={`py-4 px-2 border-b-2 font-medium transition-colors whitespace-nowrap text-sm md:text-base ${
-                                    activeTab === tab.id
+                                className={`py-4 px-2 border-b-2 font-medium transition-colors whitespace-nowrap text-sm md:text-base ${activeTab === tab.id
                                         ? 'border-blue-600 text-blue-600'
                                         : 'border-transparent text-gray-600 hover:text-gray-800'
-                                }`}
+                                    }`}
                             >
                                 <span className="flex items-center gap-2">
                                     <span>{tab.icon}</span>
@@ -211,9 +276,9 @@ const Admin = () => {
                                 </div>
                                 <div className="space-y-3">
                                     {alerts.map((alert) => (
-                                        <AlertCard 
-                                            key={alert.id} 
-                                            alert={alert} 
+                                        <AlertCard
+                                            key={alert.id}
+                                            alert={alert}
                                             onReview={handleReviewAlert}
                                         />
                                     ))}
@@ -241,13 +306,15 @@ const Admin = () => {
                     </>
                 )}
 
-                {activeTab !== 'dashboard' && (
-                    <div className="bg-white rounded-xl p-12 shadow-[0_4px_20px_rgba(0,0,0,0.08)] border border-gray-200 text-center">
-                        <div className="text-6xl mb-4">🚧</div>
-                        <h3 className="text-2xl font-bold text-gray-800 mb-2">{activeTab.charAt(0).toUpperCase() + activeTab.slice(1)} Section</h3>
-                        <p className="text-gray-600">This section is under development. Add your content here.</p>
-                    </div>
-                )}
+                {activeTab === 'users' && <UserManagement />}
+
+                {activeTab === 'movers' && <MoverManagement />}
+
+                {activeTab === 'trucker-applications' && <TruckerRegistrationApplications />}
+
+                {activeTab === 'leads' && <LeadsManagement />}
+
+                {/* Removed placeholder section to avoid showing 'under development' card */}
             </div>
         </div>
     );

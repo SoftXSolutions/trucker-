@@ -24,9 +24,9 @@ const Footer = () => {
             <h3 className="font-semibold text-gray-800 mb-4">For Customers</h3>
             <ul className="space-y-2">
               <li><Link to="/quote" className="text-gray-600 hover:text-primary text-sm">Get a Quote</Link></li>
-              <li><Link to="/how-it-works" className="text-gray-600 hover:text-primary text-sm">How It Works</Link></li>
+              <li><Link to="/#how-it-works" className="text-gray-600 hover:text-primary text-sm">How It Works</Link></li>
               <li><Link to="/moving-tips" className="text-gray-600 hover:text-primary text-sm">Moving Tips</Link></li>
-              <li><Link to="/faq" className="text-gray-600 hover:text-primary text-sm">FAQ</Link></li>
+              <li><Link to="/#faq" className="text-gray-600 hover:text-primary text-sm">FAQ</Link></li>
             </ul>
           </div>
 

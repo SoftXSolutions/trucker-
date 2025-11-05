@@ -1,10 +1,40 @@
 import { useState } from 'react';
 import Reviews from '../components/reviews/Reviews';
+import MoverProfileModal from '../components/dashboard/MoverProfileModal';
 
 const Dashboard = () => {
     const [activeTab, setActiveTab] = useState('overview');
     const [selectedLead, setSelectedLead] = useState(null);
     const [showModal, setShowModal] = useState(false);
+    const [showProfile, setShowProfile] = useState(false);
+    const [showNotif, setShowNotif] = useState(false);
+    const [profile, setProfile] = useState({
+        business: {
+            company: 'Premier Moving Co.',
+            email: 'contact@premiermove.com',
+            phone: '+1 (555) 123-4567',
+            website: 'https://www.premiermove.com',
+            license: 'BL-CA-2025-9876',
+            address: '123 Business St',
+            city: 'San Francisco',
+            state: 'CA',
+            zip: '94102',
+            employees: '15-25 employees',
+            years: '12 years',
+            description: 'Premier Moving Co. has been serving the Bay Area for over 12 years with professional, reliable moving services. We specialize in both residential and commercial moves with a focus on customer satisfaction.',
+            serviceAreas: ['San Francisco Bay Area','Northern California','Interstate (West Coast)'],
+            specialties: ['Residential','Commercial','Long Distance','Piano Moving']
+        },
+        insurance: {
+            dot: 'DOT-123456',
+            mc: 'MC-789012',
+            provider: 'Commercial Insurance Group',
+            policy: 'POL-2025-4567',
+            liability: '$1,000,000',
+            cargo: '$250,000',
+            expiry: '2026-12-31'
+        }
+    });
 
     const openLeadDetails = (lead) => {
         setSelectedLead(lead);
@@ -225,14 +255,25 @@ const Dashboard = () => {
                             <h1 className="text-2xl md:text-3xl font-bold text-gray-800">Mover Dashboard</h1>
                             <p className="text-sm text-gray-600 mt-1">Manage your business, leads, and customer relationships</p>
                         </div>
-                        <div className="flex items-center gap-3">
-                            <button className="relative p-2 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-full transition-colors">
+                        <div className="relative flex items-center gap-3">
+                            <button
+                                onClick={() => setShowNotif((v)=>!v)}
+                                className="relative p-2 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-full transition-colors">
                                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
                                 </svg>
                                 <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
                             </button>
-                            <button className="flex items-center gap-2 px-3 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors shadow-sm">
+                            {showNotif && (
+                                <div className="absolute right-20 top-10 w-72 bg-white rounded-xl border border-gray-200 shadow-[0_10px_35px_rgba(0,0,0,0.15)] z-10">
+                                    <div className="px-4 py-3 border-b font-semibold text-gray-800">Notifications</div>
+                                    <div className="p-3 space-y-2 text-sm">
+                                        <div className="p-3 rounded-lg border bg-yellow-50 border-yellow-200">You have 2 new leads.</div>
+                                        <div className="p-3 rounded-lg border bg-blue-50 border-blue-200">Your profile is 100% complete.</div>
+                                    </div>
+                                </div>
+                            )}
+                            <button onClick={()=>setShowProfile(true)} className="flex items-center gap-2 px-3 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors shadow-sm">
                                 <div className="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center text-white font-semibold text-sm">
                                     M
                                 </div>
@@ -242,6 +283,9 @@ const Dashboard = () => {
                     </div>
                 </div>
             </div>
+
+            {/* Profile Modal */}
+            <MoverProfileModal isOpen={showProfile} onClose={()=>setShowProfile(false)} profile={profile} setProfile={setProfile} />
 
             {/* Tabs */}
             <div className="bg-white border-b border-gray-200">
