@@ -9,8 +9,8 @@ const CompanyDetails = ({ data, updateData, onNext, onPrev }) => {
     data.state &&
     data.zipCode &&
     data.yearsInBusiness &&
-    data.insurancePolicy &&
-    data.businessLicense &&
+    data.employeeCount &&
+    data.googleMapsProfile &&
     data.description;
 
   return (
@@ -79,13 +79,64 @@ const CompanyDetails = ({ data, updateData, onNext, onPrev }) => {
             <label className="block text-sm font-medium text-gray-600 mb-2">
               State
             </label>
-            <input
-              type="text"
-              placeholder="NY"
+            <select
               value={data.state}
               onChange={(e) => updateData({ state: e.target.value })}
               className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-300 focus:border-orange-400 transition text-gray-700 placeholder-gray-400"
-            />
+            >
+              <option value="">Select State</option>
+              <option value="AL">Alabama</option>
+              <option value="AK">Alaska</option>
+              <option value="AZ">Arizona</option>
+              <option value="AR">Arkansas</option>
+              <option value="CA">California</option>
+              <option value="CO">Colorado</option>
+              <option value="CT">Connecticut</option>
+              <option value="DE">Delaware</option>
+              <option value="DC">District of Columbia</option>
+              <option value="FL">Florida</option>
+              <option value="GA">Georgia</option>
+              <option value="HI">Hawaii</option>
+              <option value="ID">Idaho</option>
+              <option value="IL">Illinois</option>
+              <option value="IN">Indiana</option>
+              <option value="IA">Iowa</option>
+              <option value="KS">Kansas</option>
+              <option value="KY">Kentucky</option>
+              <option value="LA">Louisiana</option>
+              <option value="ME">Maine</option>
+              <option value="MD">Maryland</option>
+              <option value="MA">Massachusetts</option>
+              <option value="MI">Michigan</option>
+              <option value="MN">Minnesota</option>
+              <option value="MS">Mississippi</option>
+              <option value="MO">Missouri</option>
+              <option value="MT">Montana</option>
+              <option value="NE">Nebraska</option>
+              <option value="NV">Nevada</option>
+              <option value="NH">New Hampshire</option>
+              <option value="NJ">New Jersey</option>
+              <option value="NM">New Mexico</option>
+              <option value="NY">New York</option>
+              <option value="NC">North Carolina</option>
+              <option value="ND">North Dakota</option>
+              <option value="OH">Ohio</option>
+              <option value="OK">Oklahoma</option>
+              <option value="OR">Oregon</option>
+              <option value="PA">Pennsylvania</option>
+              <option value="RI">Rhode Island</option>
+              <option value="SC">South Carolina</option>
+              <option value="SD">South Dakota</option>
+              <option value="TN">Tennessee</option>
+              <option value="TX">Texas</option>
+              <option value="UT">Utah</option>
+              <option value="VT">Vermont</option>
+              <option value="VA">Virginia</option>
+              <option value="WA">Washington</option>
+              <option value="WV">West Virginia</option>
+              <option value="WI">Wisconsin</option>
+              <option value="WY">Wyoming</option>
+            </select>
           </div>
         </div>
 
@@ -118,32 +169,32 @@ const CompanyDetails = ({ data, updateData, onNext, onPrev }) => {
           </div>
         </div>
 
-        {/* Insurance Policy Number */}
+        {/* Google Maps Profile URL */}
         <div>
           <label className="flex items-center text-sm font-medium text-gray-600 mb-2">
-            <span className="text-orange-500 mr-2">🛡️</span>
-            Insurance Policy Number
+            <span className="text-orange-500 mr-2">🗺️</span>
+            Google Profile (Maps link)
           </label>
           <input
-            type="text"
-            placeholder="INS-123456789"
-            value={data.insurancePolicy}
-            onChange={(e) => updateData({ insurancePolicy: e.target.value })}
+            type="url"
+            placeholder="https://maps.google.com/?cid=..."
+            value={data.googleMapsProfile}
+            onChange={(e) => updateData({ googleMapsProfile: e.target.value })}
             className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-300 focus:border-orange-400 transition text-gray-700 placeholder-gray-400"
           />
         </div>
 
-        {/* Business License Number */}
+        {/* Employee Number */}
         <div>
-          <label className="flex items-center text-sm font-medium text-gray-600 mb-2">
-            <span className="text-orange-500 mr-2">📋</span>
-            Business License Number
+          <label className="block text-sm font-medium text-gray-600 mb-2">
+            Number of Employees
           </label>
           <input
-            type="text"
-            placeholder="BL-987654321"
-            value={data.businessLicense}
-            onChange={(e) => updateData({ businessLicense: e.target.value })}
+            type="number"
+            min="0"
+            placeholder="e.g., 12"
+            value={data.employeeCount || ''}
+            onChange={(e) => updateData({ employeeCount: e.target.value })}
             className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-300 focus:border-orange-400 transition text-gray-700 placeholder-gray-400"
           />
         </div>

@@ -95,8 +95,8 @@ const TruckerProfile = () => {
     return (
       <div className="container mx-auto px-4 py-10">
         <div className="max-w-3xl mx-auto bg-white rounded-2xl border p-8 text-center">
-          <div className="text-xl font-bold mb-2">Trucker not found</div>
-          <Link to="/user?tab=truckers" className="text-blue-600">Back to Truckers</Link>
+          <div className="text-xl font-bold mb-2">Mover not found</div>
+          <Link to="/user?tab=truckers" className="text-blue-600">Back to Movers</Link>
         </div>
       </div>
     );
@@ -111,7 +111,7 @@ const TruckerProfile = () => {
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
-            Back to Truckers
+            Back to Movers
           </Link>
         </div>
 

@@ -18,8 +18,8 @@ const RegisterMover = () => {
     state: '',
     zipCode: '',
     yearsInBusiness: '',
-    insurancePolicy: '',
-    businessLicense: '',
+    employeeCount: '',
+    googleMapsProfile: '',
     description: ''
   });
 

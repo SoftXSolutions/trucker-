@@ -88,13 +88,13 @@ const UserDashboard = () => {
           <div className="px-5 py-4 border-b flex items-center justify-between">
             <div>
               <div className="text-xl font-bold text-gray-800">User Dashboard</div>
-              <div className="text-sm text-gray-500">Manage your quote requests and explore truckers</div>
+              <div className="text-sm text-gray-500">Manage your quote requests and explore movers</div>
             </div>
           </div>
           <div className="px-5 border-b">
             <div className="flex gap-6 overflow-x-auto">
               <button onClick={()=>setTabAndUrl('requests')} className={`py-3 border-b-2 -mb-px font-medium ${tab==='requests'?'border-orange-500 text-orange-600':'border-transparent text-gray-600 hover:text-gray-800'}`}>My Requests</button>
-              <button onClick={()=>setTabAndUrl('truckers')} className={`py-3 border-b-2 -mb-px font-medium ${tab==='truckers'?'border-orange-500 text-orange-600':'border-transparent text-gray-600 hover:text-gray-800'}`}>Truckers</button>
+              <button onClick={()=>setTabAndUrl('truckers')} className={`py-3 border-b-2 -mb-px font-medium ${tab==='truckers'?'border-orange-500 text-orange-600':'border-transparent text-gray-600 hover:text-gray-800'}`}>Movers</button>
             </div>
           </div>
 

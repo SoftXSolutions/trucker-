@@ -171,7 +171,7 @@ const Admin = () => {
                             { id: 'dashboard', label: 'Dashboard', icon: '📊' },
                             { id: 'users', label: 'Users', icon: '👥' },
                             { id: 'movers', label: 'Movers', icon: '🚚' },
-                            { id: 'trucker-applications', label: 'Trucker Applications', icon: '🚛' },
+                            { id: 'trucker-applications', label: 'Mover Applications', icon: '🚛' },
                             { id: 'leads', label: 'Leads', icon: '📋' },
                             { id: 'billing', label: 'Billing', icon: '💳' }
                         ].map((tab) => (
