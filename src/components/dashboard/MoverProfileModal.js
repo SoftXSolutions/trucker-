@@ -1,6 +1,6 @@
-import { useState } from 'react';
+// no imports needed
 
-const SectionCard = ({ title, subtitle, icon, color, children, onEdit }) => (
+export const SectionCard = ({ title, subtitle, icon, color, children, onEdit }) => (
   <div className={`rounded-xl border shadow-[0_10px_35px_rgba(0,0,0,0.10)] overflow-hidden`}
     style={{ borderColor: color }}>
     <div className="flex items-center justify-between px-6 py-4 text-white" style={{ background: color }}>
@@ -23,7 +23,7 @@ const SectionCard = ({ title, subtitle, icon, color, children, onEdit }) => (
   </div>
 );
 
-const EditModal = ({ isOpen, onClose, title, description, children, onSave }) => {
+export const EditModal = ({ isOpen, onClose, title, description, children, onSave }) => {
   if (!isOpen) return null;
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
@@ -74,14 +74,14 @@ const MoverProfileModal = ({ isOpen, onClose, profile }) => {
   );
 };
 
-const Info = ({ label, value, full }) => (
+export const Info = ({ label, value, full }) => (
   <div className={`border rounded-lg p-3 ${full ? 'md:col-span-2' : ''}`}>
     <div className="text-xs text-gray-500 mb-1">{label}</div>
     <div className="text-sm font-medium text-gray-800">{value || '—'}</div>
   </div>
 );
 
-const InfoWithIcon = ({ label, value, icon, full }) => (
+export const InfoWithIcon = ({ label, value, icon, full }) => (
   <div className={`bg-gray-50 border border-gray-200 rounded-xl p-4 ${full ? 'md:col-span-2' : ''}`}>
     <div className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">{label}</div>
     <div className="flex items-center gap-2">
@@ -91,7 +91,7 @@ const InfoWithIcon = ({ label, value, icon, full }) => (
   </div>
 );
 
-const TagPanel = ({ title, tags, color = 'blue', subtle }) => (
+export const TagPanel = ({ title, tags, color = 'blue', subtle }) => (
   <div className={`rounded-lg p-3 border ${subtle ? 'bg-yellow-50 border-yellow-200' : 'bg-blue-50 border-blue-200'}`}>
     <div className="text-sm font-semibold mb-2 text-gray-800">{title}</div>
     <div className="flex flex-wrap gap-2">
@@ -100,7 +100,7 @@ const TagPanel = ({ title, tags, color = 'blue', subtle }) => (
   </div>
 );
 
-const TwoCol = ({ label, children }) => (
+export const TwoCol = ({ label, children }) => (
   <div>
     <label className="block text-xs text-gray-600 mb-1 font-medium">{label}</label>
     {children}

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import LogoutButton from '../components/common/LogoutButton';
 import StatCard from '../components/admin/StatCard';
 import AlertCard from '../components/admin/AlertCard';
 import ApplicationCard from '../components/admin/ApplicationCard';
@@ -156,9 +157,12 @@ const Admin = () => {
             {/* Header */}
             <div className="bg-white shadow-sm border-b border-gray-200">
                 <div className="container mx-auto px-4 py-6">
-                    <div>
-                        <h1 className="text-2xl md:text-3xl font-bold text-gray-800">Admin Dashboard</h1>
-                        <p className="text-sm text-gray-600 mt-1">Monitor platform performance and manage operations</p>
+                    <div className="flex items-center justify-between">
+                        <div>
+                            <h1 className="text-2xl md:text-3xl font-bold text-gray-800">Admin Dashboard</h1>
+                            <p className="text-sm text-gray-600 mt-1">Monitor platform performance and manage operations</p>
+                        </div>
+                        <LogoutButton />
                     </div>
                 </div>
             </div>

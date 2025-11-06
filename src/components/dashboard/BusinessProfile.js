@@ -128,7 +128,6 @@ const BusinessProfile = () => {
     { description: 'Household Goods Mover - Out of State', state: 'NJ', expiration: '2026-04-09', licenseNo: '4320223' },
   ]);
 
-  const [newInsurance, setNewInsurance] = useState({ description: '', amount: '', expiration: '', contact: '', policy: '' });
   const insuranceTypes = [
     'General Liability',
     "Worker's Compensation",
