@@ -257,7 +257,8 @@ const TruckerProfile = () => {
             {/* Right Column - Contact & Actions */}
             <div className="space-y-6">
               {/* Contact Card */}
-              <div className="bg-white rounded-xl border border-gray-200 shadow-[0_4px_20px_rgba(0,0,0,0.06)] p-6 sticky top-4">
+<div className="bg-white rounded-xl border border-gray-200 shadow-[0_4px_20px_rgba(0,0,0,0.06)] p-6  top-4 right-8 w-80 z-50">
+
                 <h2 className="text-lg font-bold text-gray-900 mb-4">Contact Information</h2>
                 
                 <div className="space-y-4 mb-6">

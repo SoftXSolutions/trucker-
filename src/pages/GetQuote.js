@@ -76,7 +76,7 @@ const GetQuote = () => {
       case 'category':
         return !form.moveCategory;
       case 'locations':
-        return !form.fromZip || !form.fromCity || !form.fromState || !form.fromAddress || !form.fromDate || !form.fromTime || !form.toZip || !form.toCity || !form.toState || !form.toAddress || !form.toDate || !form.toTime;
+        return !form.fromZip || !form.fromCity || !form.fromState || !form.fromAddress || !form.fromDate || !form.toZip || !form.toCity || !form.toState || !form.toAddress;
       case 'move-type':
         return !form.moveType;
       case 'assistance':
@@ -154,11 +154,8 @@ const GetQuote = () => {
                         <input className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-300 focus:border-orange-400" placeholder="ZIP Code" value={form.fromZip} onChange={set('fromZip')} />
                         <input className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-300 focus:border-orange-400" placeholder="City" value={form.fromCity} onChange={set('fromCity')} />
                         <input className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-300 focus:border-orange-400" placeholder="State" value={form.fromState} onChange={set('fromState')} />
-                        <input className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-300 focus:border-orange-400" placeholder="Street Address" value={form.fromAddress} onChange={set('fromAddress')} />
-                        <div className="grid grid-cols-2 gap-2">
-                          <input type="date" className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-300 focus:border-orange-400" value={form.fromDate} onChange={set('fromDate')} />
-                          <input type="time" className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-300 focus:border-orange-400" value={form.fromTime} onChange={set('fromTime')} />
-                        </div>
+                          <input className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-300 focus:border-orange-400" placeholder="Street Address" value={form.fromAddress} onChange={set('fromAddress')} />
+                        <input type="date" className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-300 focus:border-orange-400" value={form.fromDate} onChange={set('fromDate')} />
                       </div>
                     </div>
                     <div className="border rounded-lg p-4">
@@ -168,10 +165,6 @@ const GetQuote = () => {
                         <input className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-300 focus:border-orange-400" placeholder="City" value={form.toCity} onChange={set('toCity')} />
                         <input className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-300 focus:border-orange-400" placeholder="State" value={form.toState} onChange={set('toState')} />
                         <input className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-300 focus:border-orange-400" placeholder="Street Address" value={form.toAddress} onChange={set('toAddress')} />
-                        <div className="grid grid-cols-2 gap-2">
-                          <input type="date" className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-300 focus:border-orange-400" value={form.toDate} onChange={set('toDate')} />
-                          <input type="time" className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-300 focus:border-orange-400" value={form.toTime} onChange={set('toTime')} />
-                        </div>
                       </div>
                     </div>
                   </div>
@@ -351,29 +344,36 @@ const GetQuote = () => {
                         <div className="font-semibold text-gray-700 mb-3">Locations</div>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                           <div>
-                            <div className="text-sm font-medium text-gray-700 mb-1">🏁 Moving From</div>
-                            <div className="text-sm text-gray-600">
-                              <div>{form.fromAddress || '—'}</div>
-                              <div>{[form.fromCity, form.fromState, form.fromZip].filter(Boolean).join(', ') || '—'}</div>
-                              <div className="mt-1 text-xs text-gray-500">📅 {form.fromDate || '—'} {form.fromTime ? `at ${form.fromTime}` : ''}</div>
+                            </div>
+                            <div className="rounded-lg border p-4">
+                              <div className="font-semibold text-gray-700 mb-2">Contact</div>
+                              <div className="text-sm text-gray-600 space-y-1">
+                                <div><span className="font-medium text-gray-800">Name:</span> {[form.firstName, form.lastName].filter(Boolean).join(' ') || '—'}</div>
+                                <div><span className="font-medium text-gray-800">Phone:</span> {form.phone || '—'}</div>
+                                <div><span className="font-medium text-gray-800">Email:</span> {form.email || '—'}</div>
+                              </div>
                             </div>
                           </div>
-                          <div>
-                            <div className="text-sm font-medium text-gray-700 mb-1">📍 Moving To</div>
-                            <div className="text-sm text-gray-600">
-                              <div>{form.toAddress || '—'}</div>
-                              <div>{[form.toCity, form.toState, form.toZip].filter(Boolean).join(', ') || '—'}</div>
-                              <div className="mt-1 text-xs text-gray-500">📅 {form.toDate || '—'} {form.toTime ? `at ${form.toTime}` : ''}</div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
 
-                      {(form.assistance === 'Move a Piano' || form.assistance === 'Truck or Container Rental' || form.assistance === 'Vehicle Move') && (
-                        <div className="rounded-lg border p-4">
-                          <div className="font-semibold text-gray-700 mb-3">Additional Details</div>
-                          <div className="text-sm text-gray-600 grid grid-cols-1 md:grid-cols-2 gap-3">
-                            {form.assistance === 'Move a Piano' && (
+                          <div className="rounded-lg border p-4">
+                            <div className="font-semibold text-gray-700 mb-3">Locations</div>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                              <div>
+                                <div className="text-sm font-medium text-gray-700 mb-1">🏁 Moving From</div>
+                                <div className="text-sm text-gray-600">
+                                  <div>{form.fromAddress || '—'}</div>
+                                  <div>{[form.fromCity, form.fromState, form.fromZip].filter(Boolean).join(', ') || '—'}</div>
+                                  <div className="mt-1 text-xs text-gray-500">📅 {form.fromDate || '—'}</div>
+                                </div>
+                              </div>
+                              <div>
+                                <div className="text-sm font-medium text-gray-700 mb-1">📍 Moving To</div>
+                                <div className="text-sm text-gray-600">
+                                  <div>{form.toAddress || '—'}</div>
+                                  <div>{[form.toCity, form.toState, form.toZip].filter(Boolean).join(', ') || '—'}</div>
+                                </div>
+                              </div>
+                            </div>
                               <>
                                 <div><span className="font-medium text-gray-800">Piano Type:</span> {form.pianoType || '—'}</div>
                                 <div><span className="font-medium text-gray-800">Floors/Stairs:</span> {form.pianoStairs || '—'}</div>

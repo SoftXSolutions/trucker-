@@ -172,8 +172,7 @@ const Admin = () => {
                             { id: 'users', label: 'Users', icon: '👥' },
                             { id: 'movers', label: 'Movers', icon: '🚚' },
                             { id: 'trucker-applications', label: 'Mover Applications', icon: '🚛' },
-                            { id: 'leads', label: 'Leads', icon: '📋' },
-                            { id: 'billing', label: 'Billing', icon: '💳' }
+                            { id: 'leads', label: 'Leads', icon: '📋' }
                         ].map((tab) => (
                             <button
                                 key={tab.id}

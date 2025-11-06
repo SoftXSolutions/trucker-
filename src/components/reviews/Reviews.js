@@ -63,71 +63,14 @@ const Reviews = ({ reviews }) => {
             )}
 
             {tab === 'request' && (
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                    {/* Left: list of customers */}
-                    <div className="lg:col-span-2 bg-white rounded-xl border border-gray-200 overflow-hidden">
-                        <div className="p-4 border-b">
-                            <h3 className="font-semibold text-gray-800">Request reviews from your customers</h3>
-                            <p className="text-sm text-gray-600">Ask customers you've worked with to rate and review you.</p>
-                        </div>
-                        <div className="max-h-[60vh] overflow-y-auto">
-                            <table className="min-w-full text-sm">
-                                <thead className="bg-gray-50 text-gray-600">
-                                    <tr>
-                                        <th className="text-left py-2 px-4">Customer</th>
-                                        <th className="text-left py-2 px-4">Service</th>
-                                        <th className="text-left py-2 px-4">Lead date</th>
-                                        <th className="py-2 px-4">Request review</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {customers.map((c, i) => (
-                                        <tr key={i} className={`border-t ${i%2?'bg-white':'bg-gray-50/60'}`}>
-                                            <td className="py-2 px-4 font-medium text-gray-800">{c.name}</td>
-                                            <td className="py-2 px-4 text-gray-700">{c.service}</td>
-                                            <td className="py-2 px-4 text-gray-700">{c.leadDate}</td>
-                                            <td className="py-2 px-4 text-right">
-                                                <button onClick={()=>setConfirmName(c.name)} className="px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm">Send request</button>
-                                            </td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                    {/* Right: email request form */}
-                    <div className="bg-white rounded-xl border border-gray-200 p-4 h-fit">
-                        <h3 className="font-semibold text-gray-800 mb-3">Email a review request</h3>
-                        <div className="space-y-3">
-                            <div>
-                                <label className="block text-sm text-gray-600 mb-1">To</label>
-                                <input value={emailForm.to} onChange={(e)=>setEmailForm(v=>({...v,to:e.target.value}))} className="w-full border rounded-lg px-3 py-2" placeholder="customer@email.com" />
-                            </div>
-                            <div>
-                                <label className="block text-sm text-gray-600 mb-1">From</label>
-                                <input value={emailForm.from} onChange={(e)=>setEmailForm(v=>({...v,from:e.target.value}))} className="w-full border rounded-lg px-3 py-2" />
-                            </div>
-                            <div>
-                                <label className="block text-sm text-gray-600 mb-1">Message</label>
-                                <textarea value={emailForm.message} onChange={(e)=>setEmailForm(v=>({...v,message:e.target.value}))} className="w-full border rounded-lg px-3 py-2 h-28" />
-                            </div>
-                            <button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg">Send request</button>
-                        </div>
-
-                        <div className="mt-6 p-4 bg-gray-50 rounded-lg border">
-                            <div className="font-semibold text-gray-800 mb-2">Add reviews from Google</div>
-                            <p className="text-sm text-gray-600 mb-3">Connect to your Google Business Profile and import your recent reviews.</p>
-                            {connectedGoogle ? (
-                                <div className="text-sm text-green-700 bg-green-50 border border-green-200 rounded-lg p-3">Connected to Google. You can now import reviews.</div>
-                            ) : (
-                                <button onClick={()=>setShowGoogleModal(true)} className="px-4 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 flex items-center gap-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" className="w-5 h-5"><path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12 s5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24 s8.955,20,20,20s20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"/><path fill="#FF3D00" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657 C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.443,6.306,14.691z"/><path fill="#4CAF50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36 c-5.202,0-9.619-3.317-11.277-7.949l-6.563,5.046C9.554,39.556,16.227,44,24,44z"/><path fill="#1976D2" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-3.983,5.571 c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.271,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"/></svg>
-                                    Import now
-                                </button>
-                            )}
-                        </div>
-                    </div>
+                <div>
+                    {/**
+                     * Request reviews section commented out as per requirement.
+                     *
+                     * <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                     *   ... original content ...
+                     * </div>
+                     */}
                 </div>
             )}
 
@@ -139,6 +82,24 @@ const Reviews = ({ reviews }) => {
                             <li>Pros with 3+ reviews are more likely to be hired.</li>
                             <li>Asking early increases your odds of winning jobs.</li>
                         </ul>
+                    </div>
+                    {/* Google reviews section added here */}
+                    <div className="bg-white rounded-xl border p-4">
+                        <div className="font-semibold text-gray-800 mb-2">Google reviews</div>
+                        {connectedGoogle ? (
+                            <div className="flex items-center justify-between gap-3">
+                                <div className="text-sm text-green-700">Connected to Google. Import your latest reviews below.</div>
+                                <button onClick={()=>setShowGoogleModal(true)} className="px-3 py-1.5 text-sm border rounded-lg hover:bg-gray-50">Import reviews</button>
+                            </div>
+                        ) : (
+                            <div className="space-y-2">
+                                <div className="text-sm text-gray-600">Connect your Google Business Profile to import recent reviews.</div>
+                                <button onClick={()=>setShowGoogleModal(true)} className="px-4 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 inline-flex items-center gap-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" className="w-5 h-5"><path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12 s5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24 s8.955,20,20,20s20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"/><path fill="#FF3D00" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657 C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.443,6.306,14.691z"/><path fill="#4CAF50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36 c-5.202,0-9.619-3.317-11.277-7.949l-6.563,5.046C9.554,39.556,16.227,44,24,44z"/><path fill="#1976D2" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-3.983,5.571 c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.271,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"/></svg>
+                                    Connect Google
+                                </button>
+                            </div>
+                        )}
                     </div>
                     <div className="bg-white rounded-xl border p-4">
                         <div className="font-semibold text-gray-800 mb-2">Recent feedback</div>

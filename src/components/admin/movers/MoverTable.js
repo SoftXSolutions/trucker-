@@ -40,6 +40,9 @@ const MoverTable = ({ movers, onViewDetails, onEdit, onSuspend, onDelete, select
                 Plan
               </th>
               <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                Plan Expiry
+              </th>
+              <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                 Rating
               </th>
               <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
@@ -88,6 +91,7 @@ const MoverTable = ({ movers, onViewDetails, onEdit, onSuspend, onDelete, select
                   </span>
                 </td>
                 <td className="px-6 py-4 text-sm text-gray-900">{mover.plan}</td>
+                <td className="px-6 py-4 text-sm text-gray-900">{mover.planExpiry}</td>
                 <td className="px-6 py-4">
                   <div className="flex items-center gap-1">
                     <span className="text-yellow-500">⭐</span>

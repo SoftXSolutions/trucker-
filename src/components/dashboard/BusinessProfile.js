@@ -95,6 +95,7 @@ const BusinessProfile = () => {
     name: 'Atlas Logistics Services, LLC',
     description: 'Atlas Logistics Services, LLC proudly serves our customers with pride, integrity, and attention to the details that matter most to you. This is one of the many things that set us apart from the rest. We are locally owned and operated. Please give us a call today!\n\nWe only specialize in full house moves and no one item or short distance moves.',
     website: 'http://www.atlaslogisticsservices.com',
+    location: 'San Francisco, CA',
     features: {
       emergency: false,
       bilingual: true,
@@ -549,6 +550,10 @@ const BusinessProfile = () => {
                     <h2 className="text-2xl font-bold text-gray-800">About</h2>
                   </div>
                   <div className="p-4 md:p-6 space-y-4">
+                    <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
+                      <div className="text-sm font-semibold text-gray-800 mb-1">Mover location</div>
+                      <div className="text-sm text-gray-700">{bizForm.location}</div>
+                    </div>
                     <label className="block text-sm font-medium text-gray-800">About your business</label>
                     <textarea rows={8} className="w-full border rounded-md px-3 py-2" placeholder="Tell customers about your business, experience, and values..." />
                     <div className="pt-2 flex justify-end">
@@ -564,6 +569,16 @@ const BusinessProfile = () => {
                     <h2 className="text-2xl font-bold text-gray-800">Account details</h2>
                   </div>
                   <div className="p-4 md:p-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="border rounded-lg p-3 bg-gray-50">
+                        <div className="text-xs text-gray-500 mb-1">Company name</div>
+                        <div className="text-sm font-medium text-gray-800">{bizForm.name}</div>
+                      </div>
+                      <div className="border rounded-lg p-3 bg-gray-50">
+                        <div className="text-xs text-gray-500 mb-1">Account email</div>
+                        <div className="text-sm font-medium text-gray-800">{emails[0]?.email || '—'}</div>
+                      </div>
+                    </div>
                     <div>
                       <label className="block text-sm font-medium text-gray-800 mb-1">Account email</label>
                       <input className="w-full border rounded-md px-3 py-2" placeholder="email@example.com" />
