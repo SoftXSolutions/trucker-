@@ -1,7 +1,9 @@
 import React from 'react';
 
-const ReviewSubmit = ({ data, updateData, onSubmit, onPrev }) => {
-  const canSubmit = data.agreedToTerms;
+// Modified: this component now serves only as a review screen with Back and Continue.
+// It no longer performs final submission; 'onContinue' advances to OTP step.
+const ReviewSubmit = ({ data, updateData, onContinue, onPrev }) => {
+  const canContinue = data.agreedToTerms;
 
   const specialtyLabels = {
     'residential': 'Residential Moving',
@@ -200,11 +202,11 @@ const ReviewSubmit = ({ data, updateData, onSubmit, onPrev }) => {
           ← Back
         </button>
         <button
-          onClick={onSubmit}
-          disabled={!canSubmit}
+          onClick={onContinue}
+          disabled={!canContinue}
           className="flex-1 bg-gradient-to-r from-green-500 to-green-600 text-white py-3 rounded-lg font-semibold hover:from-green-600 hover:to-green-700 transition disabled:opacity-50 disabled:cursor-not-allowed shadow-md"
         >
-          Submit Application
+          Continue → OTP
         </button>
       </div>
     </div>

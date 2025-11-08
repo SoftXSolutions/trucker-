@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import LogoutButton from '../components/common/LogoutButton';
 
 const getStoredRequests = () => {
   try {
@@ -102,7 +101,6 @@ const UserDashboard = () => {
               <div className="text-xl font-bold text-gray-800">User Dashboard</div>
               <div className="text-sm text-gray-500">Manage your quote requests and explore movers</div>
             </div>
-            <LogoutButton />
           </div>
           <div className="px-5 border-b">
             <div className="flex gap-6 overflow-x-auto">

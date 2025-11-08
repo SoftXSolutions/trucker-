@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import LogoutButton from '../components/common/LogoutButton';
 
 import Reviews from '../components/reviews/Reviews';
 import MoverProfileModal from '../components/dashboard/MoverProfileModal';
@@ -11,7 +10,8 @@ const Dashboard = () => {
     const [showModal, setShowModal] = useState(false);
     const [showProfile, setShowProfile] = useState(false);
     const [showNotif, setShowNotif] = useState(false);
-    const [isVerified, setIsVerified] = useState(true);
+    // Until admin verifies the account, leads should be locked
+    const [isVerified, setIsVerified] = useState(false);
     const [profile, setProfile] = useState({
         business: {
             company: 'Premier Moving Co.',
@@ -282,7 +282,14 @@ const Dashboard = () => {
                                     <div className="px-4 py-3 border-b font-semibold text-gray-800">Notifications</div>
                                     <div className="p-3 space-y-2 text-sm">
                                         <div className="p-3 rounded-lg border bg-yellow-50 border-yellow-200">You have 2 new leads.</div>
-                                        <div className="p-3 rounded-lg border bg-blue-50 border-blue-200">Your profile is 100% complete.</div>
+                                        {!isVerified && (
+                                            <div className="p-3 rounded-lg border bg-red-50 border-red-200 text-red-800">
+                                                Complete your business profile and wait for admin verification to unlock lead details.
+                                            </div>
+                                        )}
+                                        {isVerified && (
+                                            <div className="p-3 rounded-lg border bg-blue-50 border-blue-200">Your profile is 100% complete.</div>
+                                        )}
                                     </div>
                                 </div>
                             )}
@@ -292,7 +299,7 @@ const Dashboard = () => {
                                 </div>
                                 <span className="hidden sm:inline font-medium text-gray-700 text-sm">{profile?.business?.company || 'Company'}</span>
                             </div>
-                            <LogoutButton className="ml-1" />
+                            {/* Logout is available in the navbar; removed duplicate page-level button */}
                         </div>
                     </div>
                 </div>
@@ -582,7 +589,7 @@ const Dashboard = () => {
                             {/* Right: detail pane */}
                             <div className="relative bg-white rounded-xl border border-gray-200 overflow-hidden lg:col-span-2 min-h-[60vh]">
                                 {selectedLead ? (
-                                    <div className={`p-4 ${!isVerified ? 'pointer-events-none blur-sm' : ''}`}>
+                                    <div className="p-4">
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                                             <div className="h-10 bg-gray-100 rounded" />
                                             <div className="h-10 bg-gray-100 rounded" />
@@ -595,40 +602,37 @@ const Dashboard = () => {
                                                 <button className="px-3 py-1 rounded-md border text-gray-700">Notes</button>
                                                 <button className="px-3 py-1 rounded-md border text-gray-700">History</button>
                                             </div>
-                                            <div className="p-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                                <div>
-                                                    <div className="text-xs text-gray-500 mb-1">Lead number</div>
-                                                    <div className="h-9 bg-gray-100 rounded" />
+                                            {isVerified ? (
+                                                <div className="p-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                                    <div>
+                                                        <div className="text-xs text-gray-500 mb-1">Lead number</div>
+                                                        <div className="h-9 bg-gray-100 rounded" />
+                                                    </div>
+                                                    <div>
+                                                        <div className="text-xs text-gray-500 mb-1">Lead date</div>
+                                                        <div className="h-9 bg-gray-100 rounded" />
+                                                    </div>
+                                                    <div>
+                                                        <div className="text-xs text-gray-500 mb-1">Lead fee</div>
+                                                        <div className="h-9 bg-gray-100 rounded" />
+                                                    </div>
+                                                    <div>
+                                                        <div className="text-xs text-gray-500 mb-1">Lead type</div>
+                                                        <div className="h-9 bg-gray-100 rounded" />
+                                                    </div>
                                                 </div>
-                                                <div>
-                                                    <div className="text-xs text-gray-500 mb-1">Lead date</div>
-                                                    <div className="h-9 bg-gray-100 rounded" />
+                                            ) : (
+                                                <div className="p-6">
+                                                    <div className="rounded-lg border border-yellow-300 bg-yellow-50 p-4 text-sm">
+                                                        <div className="font-semibold text-gray-800 mb-1">Lead is locked</div>
+                                                        <div className="text-gray-700">Complete your profile and wait for admin verification to unlock the lead details.</div>
+                                                    </div>
                                                 </div>
-                                                <div>
-                                                    <div className="text-xs text-gray-500 mb-1">Lead fee</div>
-                                                    <div className="h-9 bg-gray-100 rounded" />
-                                                </div>
-                                                <div>
-                                                    <div className="text-xs text-gray-500 mb-1">Lead type</div>
-                                                    <div className="h-9 bg-gray-100 rounded" />
-                                                </div>
-                                            </div>
+                                            )}
                                         </div>
                                     </div>
                                 ) : (
                                     <div className="p-6 text-sm text-gray-600">Select a lead from the list to view details.</div>
-                                )}
-
-                                {!isVerified && selectedLead && (
-                                    <div className="absolute inset-0 flex items-center justify-center">
-                                        <div className="text-center bg-white/70 backdrop-blur-sm p-6 rounded-xl border">
-                                            <div className="mx-auto w-12 h-12 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center mb-3">
-                                                <svg className="w-6 h-6" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M10 2a4 4 0 00-4 4v2H5a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-1V6a4 4 0 00-4-4zM8 8V6a2 2 0 114 0v2H8z" clipRule="evenodd"/></svg>
-                                            </div>
-                                            <div className="font-semibold text-gray-800">Details locked</div>
-                                            <div className="text-sm text-gray-600">Your account must be verified by admin to view full lead details.</div>
-                                        </div>
-                                    </div>
                                 )}
                             </div>
                         </div>

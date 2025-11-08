@@ -6,7 +6,7 @@ const SignInMover = () => {
   const { loginMover } = useAuth();
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [phone, setPhone] = useState('');
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
@@ -29,11 +29,19 @@ const SignInMover = () => {
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label className="block text-sm text-gray-700 mb-1">Email</label>
-              <input value={email} onChange={(e)=>setEmail(e.target.value)} type="email" className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-300 focus:border-orange-400" required />
+              <input value={email} onChange={(e)=>setEmail(e.target.value)} placeholder='Email@gmail.com' type="email" className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-300 focus:border-orange-400" required />
             </div>
-            <div>
-              <label className="block text-sm text-gray-700 mb-1">Password</label>
-              <input value={password} onChange={(e)=>setPassword(e.target.value)} type="password" className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-300 focus:border-orange-400" required />
+           <div>
+              <label className="block text-sm text-gray-700 mb-1">Phone Number</label>
+              <input
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                type="tel"
+                pattern="[0-9]{10,15}"
+                placeholder="e.g. 03001234567"
+                className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-300 focus:border-orange-400"
+                required
+              />
             </div>
             <button type="submit" disabled={loading} className="w-full bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded-lg transition">
               {loading ? 'Signing in...' : 'Sign In'}

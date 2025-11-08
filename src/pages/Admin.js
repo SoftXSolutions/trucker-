@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import LogoutButton from '../components/common/LogoutButton';
 import StatCard from '../components/admin/StatCard';
 import AlertCard from '../components/admin/AlertCard';
 import ApplicationCard from '../components/admin/ApplicationCard';
+import MoverApplicationModal from '../components/admin/MoverApplicationModal';
 import TruckerApplicationCard from '../components/admin/TruckerApplicationCard';
 import UserManagement from '../components/admin/UserManagement';
 import { MoverManagement } from '../components/admin/movers';
@@ -17,6 +17,7 @@ const Admin = () => {
     const [stats, setStats] = useState(null);
     const [alerts, setAlerts] = useState([]);
     const [applications, setApplications] = useState([]);
+    const [selectedApplication, setSelectedApplication] = useState(null);
     const [truckerApplications, setTruckerApplications] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -27,10 +28,9 @@ const Admin = () => {
     const loadDashboardData = async () => {
         try {
             setLoading(true);
-            const [statsData, alertsData, appsData] = await Promise.all([
+            const [statsData, alertsData] = await Promise.all([
                 adminApi.getDashboardStats(),
-                adminApi.getCriticalAlerts(),
-                adminApi.getMoverApplications()
+                adminApi.getCriticalAlerts()
             ]);
 
             // Mock trucker applications data - replace with API call later
@@ -57,7 +57,8 @@ const Admin = () => {
 
             setStats(statsData);
             setAlerts(alertsData);
-            setApplications(appsData);
+            // mover applications are now loaded separately
+            // see useEffect below
             setTruckerApplications(mockTruckerApps);
         } catch (error) {
             console.error('Error loading dashboard data:', error);
@@ -66,12 +67,33 @@ const Admin = () => {
         }
     };
 
+    // Initialize and load mover applications from localStorage (frontend only)
+    useEffect(() => {
+        let mounted = true;
+        import('../services/moverApplicationsStore').then(store => {
+            store.default.initMoverApplications();
+            store.default.fetchMoverApplications().then(data => {
+                if (mounted) setApplications(data);
+            });
+            // Listen for updates from registration page
+            const onUpdate = async () => {
+                const refreshed = await store.default.fetchMoverApplications();
+                if (mounted) setApplications(refreshed);
+            };
+            window.addEventListener('moverApplicationsUpdated', onUpdate);
+            // Cleanup
+            return () => window.removeEventListener('moverApplicationsUpdated', onUpdate);
+        });
+        return () => { mounted = false; };
+    }, []);
+
     const handleApprove = async (application) => {
         try {
-            await adminApi.approveMoverApplication(application.id);
-            // Reload applications
-            const appsData = await adminApi.getMoverApplications();
-            setApplications(appsData);
+            const store = await import('../services/moverApplicationsStore');
+            await store.default.approveMoverApplication(application.id);
+            const refreshed = await store.default.fetchMoverApplications();
+            setApplications(refreshed);
+            setSelectedApplication(prev => prev && prev.id === application.id ? refreshed.find(a => a.id === application.id) : prev);
         } catch (error) {
             console.error('Error approving application:', error);
         }
@@ -79,10 +101,11 @@ const Admin = () => {
 
     const handleReject = async (application) => {
         try {
-            await adminApi.rejectMoverApplication(application.id, 'Rejected by admin');
-            // Reload applications
-            const appsData = await adminApi.getMoverApplications();
-            setApplications(appsData);
+            const store = await import('../services/moverApplicationsStore');
+            await store.default.rejectMoverApplication(application.id, 'Rejected by admin');
+            const refreshed = await store.default.fetchMoverApplications();
+            setApplications(refreshed);
+            setSelectedApplication(prev => prev && prev.id === application.id ? refreshed.find(a => a.id === application.id) : prev);
         } catch (error) {
             console.error('Error rejecting application:', error);
         }
@@ -157,12 +180,12 @@ const Admin = () => {
             {/* Header */}
             <div className="bg-white shadow-sm border-b border-gray-200">
                 <div className="container mx-auto px-4 py-6">
-                    <div className="flex items-center justify-between">
+                        <div className="flex items-center justify-between">
                         <div>
                             <h1 className="text-2xl md:text-3xl font-bold text-gray-800">Admin Dashboard</h1>
                             <p className="text-sm text-gray-600 mt-1">Monitor platform performance and manage operations</p>
                         </div>
-                        <LogoutButton />
+                        {/* Logout is available in the navbar; page-level logout removed */}
                     </div>
                 </div>
             </div>
@@ -292,7 +315,9 @@ const Admin = () => {
                             <div className="bg-white rounded-xl p-6 shadow-[0_4px_20px_rgba(0,0,0,0.08)] border border-gray-200">
                                 <div className="flex items-center justify-between mb-4">
                                     <h3 className="text-lg font-bold text-gray-800">Recent Mover Applications</h3>
-                                    <p className="bg-black rounded-lg p-1.5  text-white text-sm text-gray-600">2 Pending</p>
+                                    <p className="bg-black rounded-lg p-1.5 text-white text-sm">
+                                        {applications.filter(a => a.status === 'pending').length} Pending
+                                    </p>
                                 </div>
                                 <div className="space-y-3">
                                     {applications.map((app) => (
@@ -301,6 +326,7 @@ const Admin = () => {
                                             application={app}
                                             onApprove={handleApprove}
                                             onReject={handleReject}
+                                            onOpen={(a) => setSelectedApplication(a)}
                                         />
                                     ))}
                                 </div>
@@ -316,6 +342,15 @@ const Admin = () => {
                 {activeTab === 'trucker-applications' && <TruckerRegistrationApplications />}
 
                 {activeTab === 'leads' && <LeadsManagement />}
+
+                {selectedApplication && (
+                    <MoverApplicationModal
+                        application={selectedApplication}
+                        onClose={() => setSelectedApplication(null)}
+                        onApprove={handleApprove}
+                        onReject={handleReject}
+                    />
+                )}
 
                 {/* Removed placeholder section to avoid showing 'under development' card */}
             </div>

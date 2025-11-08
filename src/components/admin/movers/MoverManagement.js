@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import PageHeader from '../PageHeader';
-import LogoutButton from '../../common/LogoutButton';
 import SearchBar from '../SearchBar';
 import BulkActions from '../BulkActions';
 import MoverTable from './MoverTable';
@@ -384,7 +383,6 @@ const MoverManagement = () => {
         subtitle="Review and manage mover accounts"
         actions={
           <>
-            <LogoutButton className="mr-2" />
             <ExportButton onClick={() => setShowExportModal(true)} />
           </>
         }

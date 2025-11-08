@@ -434,7 +434,7 @@ const GetQuote = () => {
               } catch (e) {
                 console.error('Failed saving request', e);
               }
-              navigate('/choose-movers', { state: { form } });
+              navigate('/user');
             }}
           />
         </div>
